@@ -96,7 +96,29 @@ const BookConnectApp = {
         return option;
     },
 
-    
+    /* Book Rendering Functions */
+    renderBooks() {
+        const bookList = document.querySelector('[data-list-items]');
+        bookList.innerHTML = ''; // Clear existing content
+        const fragment = document.createDocumentFragment();
+        this.matches.slice(0, BOOKS_PER_PAGE).forEach(book => {
+            fragment.appendChild(this.createBookButton(book));
+        });
+        bookList.appendChild(fragment);
+    },
+
+    createBookButton({ author, id, image, title }) {
+        const button = document.createElement('button');
+        button.className = 'preview';
+        button.setAttribute('data-preview', id);
+        button.innerHTML = `
+            <img class="preview__image" src="${image}" />
+            <div class="preview__info">
+                <h3 class="preview__title">${title}</h3>
+                <div class="preview__author">${authors[author]}</div>
+            </div>`;
+        return button;
+    },
 
 }
 
