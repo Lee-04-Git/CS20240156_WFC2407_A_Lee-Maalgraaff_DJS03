@@ -52,6 +52,27 @@ const BookConnectApp = {
           this.displayBookDetails(activeBook);
       }
   },
+
+    /* Theme Management Functions */
+    setupTheme() {
+        const theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'night' : 'day';
+        document.querySelector('[data-settings-theme]').value = theme;
+        this.applyTheme(theme);
+    },
+
+    applyTheme(theme) {
+        const darkColor = theme === 'night' ? '255, 255, 255' : '10, 10, 20';
+        const lightColor = theme === 'night' ? '10, 10, 20' : '255, 255, 255';
+        document.documentElement.style.setProperty('--color-dark', darkColor);
+        document.documentElement.style.setProperty('--color-light', lightColor);
+    },
+
+    updateTheme(event) {
+        event.preventDefault();
+        const theme = new FormData(event.target).get('theme');
+        this.applyTheme(theme);
+        this.closeSettingsOverlay();
+    },
 }
 
 const starting = document.createDocumentFragment();
