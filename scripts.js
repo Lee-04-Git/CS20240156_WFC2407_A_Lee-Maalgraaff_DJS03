@@ -141,6 +141,24 @@ const BookConnectApp = {
         this.closeSearchOverlay();
     },
 
+     /* Load More Books */
+     loadMoreBooks() {
+        const fragment = document.createDocumentFragment();
+        const start = this.page * BOOKS_PER_PAGE;
+        const end = start + BOOKS_PER_PAGE;
+        this.matches.slice(start, end).forEach(book => fragment.appendChild(this.createBookButton(book)));
+        document.querySelector('[data-list-items]').appendChild(fragment);
+        this.page += 1;
+        this.updateShowMoreButton();
+    },
+
+    updateShowMoreButton() {
+        const remaining = this.matches.length - (this.page * BOOKS_PER_PAGE);
+        const showMoreButton = document.querySelector('[data-list-button]');
+        showMoreButton.innerHTML = `<span>Show more</span> <span class="list__remaining">(${Math.max(remaining, 0)})</span>`;
+        showMoreButton.disabled = remaining < 1;
+    },
+
 }
 
 const starting = document.createDocumentFragment();
