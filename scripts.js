@@ -73,6 +73,22 @@ const BookConnectApp = {
         this.applyTheme(theme);
         this.closeSettingsOverlay();
     },
+      /* Dropdown Population Functions */
+      populateDropdowns() {
+        this.populateDropdown('[data-search-genres]', genres, 'All Genres');
+        this.populateDropdown('[data-search-authors]', authors, 'All Authors');
+    },
+
+    populateDropdown(selector, data, defaultText) {
+        const dropdown = document.querySelector(selector);
+        dropdown.innerHTML = ''; // Clear existing options
+        dropdown.appendChild(this.createDropdownOption('any', defaultText));
+        
+        Object.entries(data).forEach(([id, name]) => {
+            dropdown.appendChild(this.createDropdownOption(id, name));
+        });
+    },
+
 }
 
 const starting = document.createDocumentFragment();
