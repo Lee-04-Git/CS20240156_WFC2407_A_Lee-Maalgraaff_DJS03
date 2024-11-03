@@ -180,6 +180,8 @@ const BookConnectApp = {
     openSettingsOverlay() {
         document.querySelector('[data-settings-overlay]').open = true;
     },
+};
+// Initialize the application on page load
+document.addEventListener('DOMContentLoaded', () => BookConnectApp.init());
 
-}
 
