@@ -120,6 +120,27 @@ const BookConnectApp = {
         return button;
     },
 
+     /* Search Functionality */
+     filterBooks(filters) {
+        return books.filter(book => {
+            const genreMatch = filters.genre === 'any' || book.genres.includes(filters.genre);
+            const titleMatch = !filters.title.trim() || book.title.toLowerCase().includes(filters.title.toLowerCase());
+            const authorMatch = filters.author === 'any' || book.author === filters.author;
+            return titleMatch && authorMatch && genreMatch;
+        });
+    },
+
+    handleSearch(event) {
+        event.preventDefault();
+        const filters = Object.fromEntries(new FormData(event.target));
+        this.matches = this.filterBooks(filters);
+        this.page = 1;
+        this.renderBooks();
+        this.updateShowMoreButton();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        this.closeSearchOverlay();
+    },
+
 }
 
 const starting = document.createDocumentFragment();
