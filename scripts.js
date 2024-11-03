@@ -34,6 +34,24 @@ const BookConnectApp = {
     headerSettings.addEventListener('click', this.openSettingsOverlay.bind(this));
     listClose.addEventListener('click', this.closeBookDetails.bind(this));
    },
+
+      /* Book Details Display */
+      displayBookDetails(active) {
+        if (!active) return; // Ensure active book is defined
+        document.querySelector('[data-list-active]').open = true;
+        document.querySelector('[data-list-blur]').src = active.image;
+        document.querySelector('[data-list-image]').src = active.image;
+        document.querySelector('[data-list-title]').innerText = active.title;
+        document.querySelector('[data-list-subtitle]').innerText = `${authors[active.author]} (${new Date(active.published).getFullYear()})`;
+        document.querySelector('[data-list-description]').innerText = active.description;
+    },
+     showBookDetails(event) {
+      const bookId = event.target.closest('[data-preview]')?.dataset.preview;
+      if (bookId) {
+          const activeBook = books.find(book => book.id === bookId);
+          this.displayBookDetails(activeBook);
+      }
+  },
 }
 
 const starting = document.createDocumentFragment();
