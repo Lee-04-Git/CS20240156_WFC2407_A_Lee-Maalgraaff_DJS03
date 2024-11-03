@@ -11,6 +11,29 @@ const BookConnectApp = {
         this.renderBooks();         // Render books last
         this.updateShowMoreButton();
     },
+
+    /* Setup Event Listeners */
+    setupEventListeners() {
+    const listButton = document.querySelector('[data-list-button]');
+    const searchForm = document.querySelector('[data-search-form]');
+    const listItems = document.querySelector('[data-list-items]');
+    const settingsForm = document.querySelector('[data-settings-form]');
+    const searchCancel = document.querySelector('[data-search-cancel]');
+    const settingsCancel = document.querySelector('[data-settings-cancel]');
+    const headerSearch = document.querySelector('[data-header-search]');
+    const headerSettings = document.querySelector('[data-header-settings]');
+    const listClose = document.querySelector('[data-list-close]');
+
+    listButton.addEventListener('click', this.loadMoreBooks.bind(this));
+    searchForm.addEventListener('submit', this.handleSearch.bind(this));
+    listItems.addEventListener('click', this.showBookDetails.bind(this));
+    settingsForm.addEventListener('submit', this.updateTheme.bind(this));
+    searchCancel.addEventListener('click', this.closeSearchOverlay.bind(this));
+    settingsCancel.addEventListener('click', this.closeSettingsOverlay.bind(this));
+    headerSearch.addEventListener('click', this.openSearchOverlay.bind(this));
+    headerSettings.addEventListener('click', this.openSettingsOverlay.bind(this));
+    listClose.addEventListener('click', this.closeBookDetails.bind(this));
+   },
 }
 
 const starting = document.createDocumentFragment();
