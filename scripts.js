@@ -159,6 +159,28 @@ const BookConnectApp = {
         showMoreButton.disabled = remaining < 1;
     },
 
+    /* Overlay Handling Functions */
+    closeBookDetails() {
+        document.querySelector('[data-list-active]').open = false;
+    },
+
+    closeSearchOverlay() {
+        document.querySelector('[data-search-overlay]').open = false;
+    },
+
+    closeSettingsOverlay() {
+        document.querySelector('[data-settings-overlay]').open = false;
+    },
+
+    openSearchOverlay() {
+        document.querySelector('[data-search-overlay]').open = true;
+        document.querySelector('[data-search-title]').focus();
+    },
+
+    openSettingsOverlay() {
+        document.querySelector('[data-settings-overlay]').open = true;
+    },
+
 }
 
 const starting = document.createDocumentFragment();
