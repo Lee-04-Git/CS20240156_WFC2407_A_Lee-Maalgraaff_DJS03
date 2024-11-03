@@ -1,9 +1,19 @@
 import { books, authors, genres, BOOKS_PER_PAGE } from './data.js'
+// original code
+const BookConnectApp = {
+    page: 1,
+    matches: books, // Initialize with all books
 
-let page = 1;
-let matches = books
+    init() {
+        this.setupEventListeners(); // Setup event listeners early
+        this.setupTheme();          // Setup theme after listeners
+        this.populateDropdowns();   // Populate dropdowns next
+        this.renderBooks();         // Render books last
+        this.updateShowMoreButton();
+    },
+}
 
-const starting = document.createDocumentFragment()
+const starting = document.createDocumentFragment();
 
 for (const { author, id, image, title } of matches.slice(0, BOOKS_PER_PAGE)) {
     const element = document.createElement('button')
